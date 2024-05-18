@@ -14,3 +14,8 @@ cd app
 npm install
 npm run dev -- --open
 ```
+
+### Tailwind CSS
+
+```bash
+```
