@@ -1,0 +1,1 @@
+export const UI_AVATARS_BASE_URL = 'https://ui-avatars.com/api/';

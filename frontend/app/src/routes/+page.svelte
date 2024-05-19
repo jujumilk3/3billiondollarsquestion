@@ -1,15 +1,21 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import {UI_AVATARS_BASE_URL} from '$lib/constants/sites';
+    import {generateAvatarUrl} from '$lib/api/apiRequests';
+
+
+    console.log(UI_AVATARS_BASE_URL);
     const typingDelay: number = 20;    
 
     let currentIndex: number = 0;
-    let answers: string[] = ["If you were given $3 billion after all your life's problems were solved (e.g., housing, car, family, job, etc.), what would you do?",
-    "What is the most impactful book you've ever read and why?",
-    "Describe a time when you overcame a significant challenge and what you learned from the experience."
-];
     let typedText: string = '';
     let charIndex: number = 0;
-    let text = answers[currentIndex];
+    let answers: string[] = ["If you were given $3 billion after all your life's problems were solved (e.g., housing, car, family, job, etc.), what would you do?",
+    "What is the most impactful book you've ever read and why?",
+    "Describe a time when you overcame a significant challenge and what you learned from the experience.",
+    "I'm gonna hold squid game in real life, what would you do to win?",
+    ];
+    let text: string = answers[currentIndex];
 
 
     const type = () => {
@@ -34,7 +40,6 @@
         }
     };
 
-
     const resetType = () => {
         typedText = '';
         charIndex = 0;
@@ -43,9 +48,10 @@
     };
 
 
-
-    onMount(() => {
+    onMount(async () =>{
         type();
+        const createdAvatarUrl = await generateAvatarUrl({name: 'John Doe'});
+        console.log(createdAvatarUrl);
     });
 </script>
 
@@ -75,9 +81,10 @@
                     </div>
                 </div>
                 <p class="text-lg text-gray-500">If you were given $3 billion after all your life's problems were solved (e.g., housing, car, family, job, etc.), what would you do?</p>
+                <!-- <img src="{UI_AVATARS_BASE_URL}/john-doe" alt="John Doe" class="w-20 h-20 rounded-full" /> -->
                 <div class="space-y-4">
-                    <label for="memo" class="block text-base font-medium text-gray-700">Answer</label>
-                    <div id="memo" class="block w-full px-4 py-5 text-gray-900 bg-white border-t border-b border-gray-300 rounded-none shadow-sm focus:outline-none sm:text-lg text-xl typed-text">
+                    <label for="memo" class="block text-base font-bold text-gray-700">Answer</label>
+                    <div id="memo" class="block w-full px-4 py-5 text-gray-600 bg-white border-t border-b border-gray-300 rounded-none shadow-sm focus:outline-none sm:text-xl text-xl typed-text">
                         {typedText}
                     </div>
                 </div>
