@@ -1,27 +1,27 @@
-<script>
-    import { onMount } from 'svelte';
-    let answers = [
+<script lang="ts">
+    let answers: string[] = [
       "If you were given $3 billion after all your life's problems were solved (e.g., housing, car, family, job, etc.), what would you do?",
       "What would you do if you had unlimited time and resources?",
       "Describe your dream vacation destination and why."
     ];
-    let currentIndex = 0;
+
+    let currentIndex: number = 0;
   
-    function nextMemo() {
+    const nextMemo = () => {
       if (currentIndex < answers.length - 1) {
         currentIndex++;
       } else {
         currentIndex = 0;
       }
-    }
-  
-    function prevMemo() {
+    };
+
+    const prevMemo = () => {
       if (currentIndex > 0) {
         currentIndex--;
       } else {
         currentIndex = answers.length - 1;
       }
-    }
+    };
 </script>
 
 <div class="relative h-screen w-full bg-gradient-to-br from-[#6366F1] to-[#9333EA]">
